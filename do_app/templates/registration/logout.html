@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Goodbye!</h1>
+        <hr>
+    </header>
+    <main>
+        <p>You have successfully logged out.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login again</a>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Go to Home</a>
+    </main>
+</div>
+</body>
+</html>

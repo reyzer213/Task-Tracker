@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Task Tracker</h1>
+        <nav>
+            <a href="{% url 'task_list' %}" class='btn btn-primary' style="margin-right: 850px;">Home</a>
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Exit</button>
+                </form>
+            {% else %}
+                <a href="{% url 'signup' %}" class='btn btn-primary' style="margin-left: -120px;">Register</a>
+                <a href="{% url 'login' %}" class='btn btn-primary' style="margin-left: 40px;">Login</a>
+            {% endif %}
+        </nav>
+        <hr>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</div>
+</body>
+</html>
