@@ -13,6 +13,21 @@
     <li>
         <strong>{{ comment.author }}:</strong> {{ comment.text }} <em>on {{ comment.created_at }}</em>
 
+        <!-- Відображення прикріпленого файлу -->
+    {% if comment.file %}
+        <p>Attached file: <a href="{{ comment.file.url }}">{{ comment.file.name }}</a></p>
+        {% if comment.file.name|slice:"-4:" == ".jpg" or comment.file.name|slice:"-4:" == ".png" %}
+            <img src="{{ comment.file.url }}" alt="Image" style="max-width: 300px;">
+        {% elif comment.file.name|slice:"-4:" == ".pdf" %}
+            <p>PDF file attached: <a href="{{ comment.file.url }}" target="_blank">View PDF</a></p>
+        {% elif comment.file.name|slice:"-4:" == ".mp4" %}
+            <video controls style="max-width: 300px;">
+                <source src="{{ comment.file.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% endif %}
+    {% endif %}
+
         <!-- Кнопки редагування та видалення для автора коментаря -->
         {% if comment.author == user %}
             <a href="{% url 'comment_edit' comment.id %}" class="btn btn-sm btn-warning">Edit</a>
@@ -33,7 +48,7 @@
 </ul>
 
 <h4>Add a comment:</h4>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Add Comment</button>

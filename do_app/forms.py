@@ -3,18 +3,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Task, Comment
 
-
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'priority', 'due_date']
 
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['text']
-
+        fields = ['text', 'file']  
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
