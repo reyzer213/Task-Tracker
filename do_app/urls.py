@@ -4,6 +4,7 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     # Список завдань
     path('', TaskListView.as_view(), name='task_list'),  
@@ -33,7 +34,20 @@ urlpatterns = [
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment_delete'),
 
     path('comment/<int:comment_id>/like/', like_comment, name='like_comment'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+
+
+
+#if settings.DEBUG:
+#    urlpatterns += patterns('',
+#        url(r'^media/(?P<path>.*)$',
+#           'django.views.static.serve',
+#            {'document_root': settings.MEDIA_ROOT, }),
+#    )
+
+
 
 #path('project/<int 😛 k>/',  
 # ProjectDetailView.as_view(), 
